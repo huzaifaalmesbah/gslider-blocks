@@ -860,6 +860,7 @@ export default function Edit( {
 					<div
 						className="swiper-pagination swiper-pagination-base-slider"
 						ref={ paginationInsideRef }
+						aria-label="Carousel pagination"
 					></div>
 				</div>
 
