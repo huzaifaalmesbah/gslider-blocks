@@ -3,6 +3,10 @@ const fs = require( 'fs' );
 const path = require( 'path' );
 const archiver = require( 'archiver' );
 
+// Top-level folder inside the archive, so the zip installs to
+// wp-content/plugins/gslider-blocks/ (WordPress admin upload and Playground).
+const PLUGIN_SLUG = 'gslider-blocks';
+
 const zip = async () => {
 	// Strictly whitelist production runtime files and directories
 	const filesAndFolders = [
@@ -33,7 +37,7 @@ const zip = async () => {
 			const stats = fs.statSync( fullPath );
 
 			if ( stats.isDirectory() ) {
-				archive.directory( fullPath, item, ( entry ) => {
+				archive.directory( fullPath, `${ PLUGIN_SLUG }/${ item }`, ( entry ) => {
 					// Normalize Windows path separators to POSIX forward slashes
 					const relativePath = entry.name.replace( /\\/g, '/' );
 
@@ -91,7 +95,7 @@ const zip = async () => {
 					return entry;
 				} );
 			} else {
-				archive.file( fullPath, { name: item } ); // Add individual file
+				archive.file( fullPath, { name: `${ PLUGIN_SLUG }/${ item }` } ); // Add individual file
 			}
 		} else {
 			console.warn(
