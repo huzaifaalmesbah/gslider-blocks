@@ -92,9 +92,8 @@ jobs:
           PR_NUMBER: ${{ steps.pr-metadata.outputs.pr-number }}
           HEAD_SHA: ${{ steps.pr-metadata.outputs.commit-sha }}
           ARTIFACT_URL: ${{ steps.expose.outputs.artifact-url }}
-          MAINTAINER_TOKEN: ${{ secrets.MAINTAINER_TOKEN }}
         with:
-          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const artifactUrl = process.env.ARTIFACT_URL;
             if (!artifactUrl) {

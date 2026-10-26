@@ -57,10 +57,8 @@ jobs:
 
       - name: Collect Contributor Props and Update PR Meta
         uses: actions/github-script@v9
-        env:
-          MAINTAINER_TOKEN: ${{ secrets.MAINTAINER_TOKEN }}
         with:
-          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const isIssueComment = context.eventName === 'issue_comment';
             if (isIssueComment && !context.payload.issue?.pull_request) {

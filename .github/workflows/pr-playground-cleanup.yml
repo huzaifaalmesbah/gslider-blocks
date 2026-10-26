@@ -58,9 +58,8 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           IS_MERGED: ${{ github.event.pull_request.merged }}
-          MAINTAINER_TOKEN: ${{ secrets.MAINTAINER_TOKEN }}
         with:
-          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const prNumber = parseInt(process.env.PR_NUMBER, 10);
             const isMerged = process.env.IS_MERGED === 'true';
